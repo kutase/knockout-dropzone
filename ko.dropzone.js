@@ -1,6 +1,5 @@
 ko.bindingHandlers.dropzone = {
   init: function (el, opts) {
-    window.test = el;
     opts = opts() || {};
 
     var removeImage = function (imageUrl) {
