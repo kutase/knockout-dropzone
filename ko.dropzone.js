@@ -23,7 +23,7 @@ ko.bindingHandlers.dropzone = {
       this.on('error', function (file, err) {
         console.error('dropzone@err:', err);
       });
-      
+
       this.on('removedfile', function (file) {
         if (Array.isArray(opts.value())) { // check observableArray
           var imageUrl = JSON.parse(file.xhr.response).url;
@@ -41,12 +41,20 @@ ko.bindingHandlers.dropzone = {
       })
     };
 
-    $.extend(opts, { 
-      acceptedFiles: 'image/*', 
+    function extend(a, b){
+        for(var key in b)
+            if(b.hasOwnProperty(key))
+                a[key] = b[key];
+        return a;
+    }
+
+    var dropzoneOptions = extend(opts, {
+      acceptedFiles: 'image/*',
       addRemoveLinks: true,
       init: dropzoneInit
     });
 
-    $(el).dropzone(opts);
+    //$(el).dropzone(dropzoneOptions);
+    new Dropzone(el, dropzoneOptions);
   }
 }
