@@ -16,14 +16,16 @@
 <body>
 
 
-  <div class="dropzone" data-bind="dropzone: { value: image, url: '/img/upload' }"></div>
+  <div id="test" class="dropzone" data-bind="dropzone: { value: image, url: '/upload'}"></div>
 
 
 
   <script>
+
     ko.applyBindings({
       image: ko.observable()
-    })
+    });
+
   </script>
 
 </body>

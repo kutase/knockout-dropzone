@@ -8,13 +8,13 @@
       opts = opts() || {};
 
       var removeImage = function (imageUrl) {
-        return $.ajax({
+        ajax({
           url: imageUrl,
-          type: 'DELETE'
-        })
-        .error(function () {
-          console.error('dropzone@err:', err);
-        })
+          type: 'DELETE',
+          error: function(err){
+            console.error('dropzone@err:', err)
+          }
+        });
       };
 
       var dropzoneInit = function () {
@@ -53,13 +53,36 @@
           return a;
       }
 
+      function ajax(options){
+        var request = new XMLHttpRequest();
+        request.open(options.type, options.url, true);
+
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            if (typeof options.success == "function"){
+              var resp = request.responseText;
+              options.success(resp);
+            }
+          } else {
+            if (typeof options.error == "function"){
+              options.error(request);
+            }
+          }
+        };
+
+        if (typeof options.error == "function"){
+          request.onerror = options.error;
+        }
+
+        request.send();
+      }
+
       var dropzoneOptions = extend(opts, {
         acceptedFiles: 'image/*',
         addRemoveLinks: true,
         init: dropzoneInit
       });
 
-      //$(el).dropzone(dropzoneOptions);
       new Dropzone(el, dropzoneOptions);
     }
   }
