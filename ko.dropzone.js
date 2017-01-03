@@ -1,4 +1,8 @@
 (function(){
+  // shuts off dropzone autoDiscover
+  // this is so we can apply the dropzone object programmatically
+  Dropzone.autoDiscover = false;
+
   ko.bindingHandlers.dropzone = {
     init: function (el, opts) {
       opts = opts() || {};
