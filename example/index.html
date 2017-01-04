@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="dropzone.css">
+
+  <script src="knockout.js"></script>
+  <script src="dropzone.js"></script>
+
+  <script src="../ko.dropzone.js"></script>
+</head>
+<body>
+
+
+  <div id="test" class="dropzone" data-bind="dropzone: { value: image, url: '/upload'}"></div>
+
+
+
+  <script>
+
+    ko.applyBindings({
+      image: ko.observable()
+    });
+
+  </script>
+
+</body>
+</html>
